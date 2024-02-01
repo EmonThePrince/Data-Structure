@@ -17,6 +17,7 @@ struct List
     int size;
     struct Node* next;
 };
+
 typedef struct Node* nodeptr;
 typedef struct List* list;
 
@@ -64,16 +65,15 @@ void display(list head){
     cout<<endl;
 }
 
-
 void addFirst(list head, int value){
      nodeptr newNode = createNode(value);
      newNode->next = head->next;
      head->next = newNode;
      head->size++;
 }
+
 void add(list head, int value,int index){
     nodeptr tail = head->next;
-
     int i = 0;
     if(index == 0) {addFirst(head, value); return;}
     if(index > head->size){
@@ -85,35 +85,74 @@ void add(list head, int value,int index){
         tail = tail->next;
         i++;
     }
-
     nodeptr newNode = createNode(value);
     newNode->next = tail->next;
     tail->next = newNode;
 }
+
+int deleteFirst(list head){
+    if(head->size -1 == 0) {
+        printf("List is empty!");
+        return -1;
+    }
+    nodeptr removedNode = head->next;
+    head->next = head->next->next;
+}
+
+int deleteNode(list head, int index){
+    nodeptr tail = head->next;
+    int i = 0;
+    if(index == 0) {return deleteFirst(head);}
+    if(index >= head->size){
+        printf("Enter a valid index.\n");
+        return -1;
+    }
+    if(head->size -1 <= 0) {
+        printf("List is empty!\n");
+        return -1;
+    }
+
+    head->size--;
+    while(i<index-1){
+        tail = tail->next;
+        i++;
+    }
+    nodeptr removedNode = tail->next;
+    tail->next = tail->next->next;
+    return removedNode->value;
+}
+
+int deleteLast(list head){
+    return deleteNode(head, head->size-1);
+}
+
 int main(){
     list myList = createList();
     
-    display(myList);
+    //display(myList);
     addLast(myList,5);
-    display(myList);
+    //display(myList);
     addLast(myList,6);
-    display(myList);
+    //display(myList);
     addLast(myList,7);
-    display(myList);
+    //display(myList);
     
     addFirst(myList,44);
-    display(myList);
+    //display(myList);
 
     add(myList,78,5); 
-    display(myList);
+    //display(myList);
 
     addFirst(myList,51);
-    display(myList);
+    //display(myList);
 
     add(myList,78,2);
     display(myList);
 
-    cout<<myList->size<<endl;
-   
+    //deleteFirst(myList);
+    //display(myList);
+
+    deleteLast(myList);
+    display(myList);
     return 0;
 }
