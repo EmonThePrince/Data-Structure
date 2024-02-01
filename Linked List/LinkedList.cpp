@@ -100,13 +100,20 @@ void add(list head, int value,int index){
 }
 
 int deleteFirst(list head){
-    if(head->size -1 == 0) {
+    if(head->size == 0) {
         printf("List is empty!");
         return -1;
+    }
+    if(head->size == 1){
+        nodeptr removedNode = head->next;
+        head->next = NULL;
+        head->size--;
+        return removedNode->value;
     }
     head->size--;
     nodeptr removedNode = head->next;
     head->next = head->next->next;
+    return removedNode->value;
 }
 
 int deleteNode(list head, int index){
@@ -117,11 +124,16 @@ int deleteNode(list head, int index){
         printf("Enter a valid index.\n");
         return -1;
     }
-    if(head->size -1 <= 0) {
+    if(head->size <= 0) {
         printf("List is empty!\n");
         return -1;
     }
-
+    if(head->size == 1){
+        nodeptr removedNode = head->next;
+        head->next = NULL;
+        head->size--;
+        return removedNode->value;
+    }
     head->size--;
     while(i<index-1){
         tail = tail->next;
@@ -155,30 +167,24 @@ int main(){
     list myList = createList();
     
     //display(myList);
-    addLast(myList,5);
-    //display(myList);
-    addLast(myList,6);
-    //display(myList);
-    addLast(myList,7);
-    //display(myList);
     
+    addLast(myList,5);
+    addLast(myList,6);
+    addLast(myList,7);
     addFirst(myList,44);
-    //display(myList);
-
     add(myList,78,5); 
-    //display(myList);
-
     addFirst(myList,51);
-    //display(myList);
-
     add(myList,78,2);
     display(myList);
 
-    //deleteFirst(myList);
-    //display(myList);
-
+    deleteFirst(myList);;
     deleteLast(myList);
+    deleteFirst(myList);
+    deleteFirst(myList);
+    deleteLast(myList);
+    deleteFirst(myList);
     display(myList);
-    cout<<searchNode(myList, 14)<<endl;
+    
+    //cout<<searchNode(myList, 14)<<endl;
     return 0;
 }
