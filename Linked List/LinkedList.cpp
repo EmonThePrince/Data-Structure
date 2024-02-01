@@ -8,183 +8,189 @@
 
 */
 
-#include<stdio.h>
-#include<stdlib.h>
-#include<iostream>
+#include <iostream>
 
 using namespace std;
 
-struct Node
-{
+struct Node {
     int value;
-    struct Node* next;
+    Node* next;
 };
 
-struct List
-{
-    //int value; //if header list
+struct List {
     int size;
-    struct Node* next;
+    Node* next;
 };
 
-typedef struct Node* nodeptr;
-typedef struct List* list;
+typedef Node* NodePtr;
+typedef List* ListPtr;
 
-nodeptr createNode(int value){
-    // nodeptr head = (nodeptr) malloc(sizeof(nodeptr)); for c
-    nodeptr head = new (struct Node); // for c++;
-    head->next = NULL;
-    head->value = value;
-    return head;
+NodePtr createNode(int value) {
+    NodePtr newNode = new Node;
+    newNode->next = nullptr;
+    newNode->value = value;
+    return newNode;
 }
 
-list createList(){
-    // struct List* head = (struct List*) malloc(sizeof(struct List)); //for c
-    list head = new (struct List); // for c++
-    head->next = NULL;
-    head->size = 0;
-    return head;
+ListPtr createList() {
+    ListPtr newList = new List;
+    newList->next = nullptr;
+    newList->size = 0;
+    return newList;
 }
 
-void display(list head){
-    nodeptr tail = head->next;
-    if(tail == NULL){
-        cout << "The list is empty!" << endl; return;
-     }
-    while(tail != NULL){
-        cout<<tail->value<<" ";
-        tail = tail->next;
+void display(ListPtr head) {
+    NodePtr current = head->next;
+    if (current == nullptr) {
+        cout << "The list is empty!" << endl;
+        return;
     }
-    cout<<endl;
+    while (current != nullptr) {
+        cout << current->value << " ";
+        current = current->next;
+    }
+    cout << endl;
 }
 
-void addLast(list head, int value){
-    nodeptr tail = head->next;
-    if(tail == NULL){
-        nodeptr newNode = createNode(value);
+void addLast(ListPtr head, int value) {
+    NodePtr current = head->next;
+    if (current == nullptr) {
+        NodePtr newNode = createNode(value);
         head->next = newNode;
         head->size++;
         return;
     }
-    while(tail->next != NULL){
-        tail = tail->next;
+    while (current->next != nullptr) {
+        current = current->next;
     }
-    nodeptr newNode = createNode(value);
-    tail->next = newNode;
+    NodePtr newNode = createNode(value);
+    current->next = newNode;
     head->size++;
 }
 
-void addFirst(list head, int value){
-     nodeptr newNode = createNode(value);
-     newNode->next = head->next;
-     head->next = newNode;
-     head->size++;
+void addFirst(ListPtr head, int value) {
+    NodePtr newNode = createNode(value);
+    newNode->next = head->next;
+    head->next = newNode;
+    head->size++;
 }
 
-void add(list head, int value,int index){
-    nodeptr tail = head->next;
+void add(ListPtr head, int value, int index) {
+    NodePtr current = head->next;
     int i = 0;
-    if(index == 0) {addFirst(head, value); return;}
-    if(index > head->size){
-        addLast(head,value);
+    if (index == 0) {
+        addFirst(head, value);
+        return;
+    }
+    if (index > head->size) {
+        addLast(head, value);
         return;
     }
     head->size++;
-    while(i<index-1){
-        tail = tail->next;
+    while (i < index - 1) {
+        current = current->next;
         i++;
     }
-    nodeptr newNode = createNode(value);
-    newNode->next = tail->next;
-    tail->next = newNode;
+    NodePtr newNode = createNode(value);
+    newNode->next = current->next;
+    current->next = newNode;
 }
 
-int deleteFirst(list head){
-    if(head->size == 0) {
-        printf("List is empty!");
+int deleteFirst(ListPtr head) {
+    if (head->size == 0) {
+        cout << "List is empty!" << endl;
         return -1;
     }
-    if(head->size == 1){
-        nodeptr removedNode = head->next;
-        head->next = NULL;
+    if (head->size == 1) {
+        NodePtr removedNode = head->next;
+        head->next = nullptr;
         head->size--;
-        return removedNode->value;
+        int value = removedNode->value;
+        delete removedNode;
+        return value;
     }
     head->size--;
-    nodeptr removedNode = head->next;
+    NodePtr removedNode = head->next;
     head->next = head->next->next;
-    return removedNode->value;
+    int value = removedNode->value;
+    delete removedNode;
+    return value;
 }
 
-int deleteNode(list head, int index){
-    nodeptr tail = head->next;
+int deleteNode(ListPtr head, int index) {
+    NodePtr current = head->next;
     int i = 0;
-    if(index == 0) {return deleteFirst(head);}
-    if(index >= head->size){
-        printf("Enter a valid index.\n");
+    if (index == 0) {
+        return deleteFirst(head);
+    }
+    if (index >= head->size) {
+        cout << "Enter a valid index." << endl;
         return -1;
     }
-    if(head->size <= 0) {
-        printf("List is empty!\n");
+    if (head->size <= 0) {
+        cout << "List is empty!" << endl;
         return -1;
     }
-    if(head->size == 1){
-        nodeptr removedNode = head->next;
-        head->next = NULL;
+    if (head->size == 1) {
+        NodePtr removedNode = head->next;
+        head->next = nullptr;
         head->size--;
-        return removedNode->value;
+        int value = removedNode->value;
+        delete removedNode;
+        return value;
     }
     head->size--;
-    while(i<index-1){
-        tail = tail->next;
+    while (i < index - 1) {
+        current = current->next;
         i++;
     }
-    nodeptr removedNode = tail->next;
-    tail->next = tail->next->next;
-    return removedNode->value;
+    NodePtr removedNode = current->next;
+    current->next = current->next->next;
+    int value = removedNode->value;
+    delete removedNode;
+    return value;
 }
 
-int deleteLast(list head){
-    return deleteNode(head, head->size-1);
+int deleteLast(ListPtr head) {
+    return deleteNode(head, head->size - 1);
 }
 
-int searchNode(list head, int item){
+int searchNode(ListPtr head, int item) {
     int index = 0;
-    nodeptr tail = head->next;
-    if(tail == NULL){
-        cout << "The list is empty!" << endl; return -1;
-     }
-    while(tail != NULL){
-        //processing
-        if(tail->value == item) return index;
-        tail = tail->next;
+    NodePtr current = head->next;
+    if (current == nullptr) {
+        cout << "The list is empty!" << endl;
+        return -1;
+    }
+    while (current != nullptr) {
+        if (current->value == item) {
+            return index;
+        }
+        current = current->next;
         index++;
     }
     return -1;
 }
 
-int main(){
-    list myList = createList();
-    
-    //display(myList);
-    
-    addLast(myList,5);
-    addLast(myList,6);
-    addLast(myList,7);
-    addFirst(myList,44);
-    add(myList,78,5); 
-    addFirst(myList,51);
-    add(myList,78,2);
+int main() {
+    ListPtr myList = createList();
+
+    addLast(myList, 5);
+    addLast(myList, 6);
+    addLast(myList, 7);
+    addFirst(myList, 44);
+    add(myList, 78, 5);
+    addFirst(myList, 51);
+    add(myList, 78, 2);
     display(myList);
 
-    deleteFirst(myList);;
+    deleteFirst(myList);
     deleteLast(myList);
     deleteFirst(myList);
     deleteFirst(myList);
     deleteLast(myList);
     deleteFirst(myList);
     display(myList);
-    
-    //cout<<searchNode(myList, 14)<<endl;
+
     return 0;
 }
