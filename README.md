@@ -41,3 +41,35 @@ Function <code><b>addFirst</b></code>, <code><b>addLast</b></code> and <code><b>
 <br/>
 <br/>
 Function <code><b>deleteFirst</b></code>, <code><b>deleteLast</b></code> and <code><b>deleteNode</b></code> is used to delete information(node) at the first, last or at any index of the linked list.
+<br/>
+<br/>
+
+Creating a list
+```c++
+    list myList = createList();
+```
+<br/>
+<br/>
+
+Insert node implementation
+```c++
+    addLast(myList,5);
+    addFirst(myList,44);
+    add(myList,78,2);
+```
+<br/>
+<br/>
+
+Delete node implementation
+```c++
+    int deletedItem1 = deleteLast(myList);
+    int deletedItem2 = deleteFirst(myList);
+    int deletedItem3 = deleteNode(myList, 44);
+```
+<br/>
+<br/>
+
+Search node implementation
+```c++
+    int itemFoundInIndex = searchNode(myList, 14);
+```
