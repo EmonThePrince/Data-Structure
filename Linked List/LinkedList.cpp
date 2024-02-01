@@ -104,6 +104,7 @@ int deleteFirst(list head){
         printf("List is empty!");
         return -1;
     }
+    head->size--;
     nodeptr removedNode = head->next;
     head->next = head->next->next;
 }
