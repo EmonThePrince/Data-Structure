@@ -1,75 +1,95 @@
-# Data Structure
-## Linked List
-This code is about a linked list that has the ability to shift itself into header linked list.Insertion deletion and searching can be performed with this linked list.
-<br/>
-<br/>
+# Linked List Implementation
 
-This part is about the start pointer and the normal node that contain the actual information.
-```c++
-struct Node //normal Node 
-{
-    int value; // Information
-    struct Node* next; // Pointer to next node
-};
+This C++ program implements a linked list with the ability to shift itself into a header linked list. It supports common operations such as insertion, deletion, and searching.
 
-struct List
-{
-    //int value; //If header list. The value here does not matter
-    int size; // List size (optional)
-    struct Node* next; // Pointer to the first node(that has information) of the list
-};
+**Author:** Saim Ahmed Emon
 
-```
+## Table of Contents
 
-<br/>
-<br/>
+- [Description](#description)
+- [Features](#features)
+- [Usage](#usage)
+- [Functions](#functions)
+- [How to Contribute](#how-to-contribute)
+- [License](#license)
 
-Function <code><b>createNode</b></code> is used to create a node it takes a value that is stored in the information part.
-<br/>
-<br/>
-Function <code><b>createList</b></code> is used to create a Linked list header pointer it is same as the start pointer that has been discussed in the class.
-<br/>
-<br/>
-Function <code><b>display</b></code> is used to display or print(on terminal) the whole linked list.
-<br/>
-<br/>
-Function <code><b>searchNode</b></code> is used to search an item from the linked list. This function the returns an integer that indicates the index of the first occurance of the information(that is given as paramiter). 
-If the information is not found than this function will return -1. The index follows the traditional array index (starts from zero). 
-<br/>
-<br/>
-Function <code><b>addFirst</b></code>, <code><b>addLast</b></code> and <code><b>add</b></code> is used to add information(node) at the first, last or at any index of the linked list.
-<br/>
-<br/>
-Function <code><b>deleteFirst</b></code>, <code><b>deleteLast</b></code> and <code><b>deleteNode</b></code> is used to delete information(node) at the first, last or at any index of the linked list.
-<br/>
-<br/>
+## Description
 
-Creating a list
-```c++
-    list myList = createList();
-```
-<br/>
-<br/>
+This C++ program demonstrates the implementation of a linked list. It provides a set of functions to manipulate the linked list, including adding elements at the beginning or end, inserting at a specific position, and deleting elements.
 
-Insert node implementation
-```c++
-    addLast(myList,5);
-    addFirst(myList,44);
-    add(myList,78,2);
-```
-<br/>
-<br/>
+## Features
 
-Delete node implementation
-```c++
-    int deletedItem1 = deleteLast(myList);
-    int deletedItem2 = deleteFirst(myList);
-    int deletedItem3 = deleteNode(myList, 44);
-```
-<br/>
-<br/>
+- Creation of a linked list.
+- Insertion of elements at the beginning, end, or specific positions.
+- Deletion of elements from the beginning, end, or specific positions.
+- Searching for an element in the linked list.
+- Header list functionality.
 
-Search node implementation
-```c++
-    int itemFoundInIndex = searchNode(myList, 14);
-```
+## Usage
+
+To use this linked list implementation, follow these steps:
+
+1. **Clone the repository:**
+
+    ```bash
+    git clone https://github.com/yourusername/linked-list.git
+    cd linked-list
+    ```
+
+2. **Compile the code:**
+
+    ```bash
+    g++ linked_list.cpp -o linked_list
+    ```
+
+3. **Run the executable:**
+
+    ```bash
+    ./linked_list
+    ```
+
+4. Explore the linked list functionalities by adding, deleting, and searching for elements.
+
+## Functions
+
+- **`createNode(int value)`**
+  - Creates a new node with the given value.
+
+- **`createList()`**
+  - Creates a new linked list.
+
+- **`display(list head)`**
+  - Displays the elements of the linked list.
+
+- **`addLast(list head, int value)`**
+  - Adds an element to the end of the linked list.
+
+- **`addFirst(list head, int value)`**
+  - Adds an element to the beginning of the linked list.
+
+- **`add(list head, int value, int index)`**
+  - Adds an element at a specific position in the linked list.
+
+- **`deleteFirst(list head)`**
+  - Deletes the first element from the linked list.
+
+- **`deleteNode(list head, int index)`**
+  - Deletes the element at a specific position in the linked list.
+
+- **`deleteLast(list head)`**
+  - Deletes the last element from the linked list.
+
+- **`searchNode(list head, int item)`**
+  - Searches for a specific element in the linked list and returns its index.
+
+## How to Contribute
+
+If you want to contribute to this project, you can:
+
+- Fork the repository.
+- Create a new branch for your feature or bug fix.
+- Make changes and submit a pull request.
+
+## License
+
+This project is licensed under the MIT License.
