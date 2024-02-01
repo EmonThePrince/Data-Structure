@@ -4,6 +4,8 @@
     Insertion deletion and searching can be performed 
     with this linked list.
 
+    -- Saim Ahmed Emon 
+
 */
 
 #include<stdio.h>
