@@ -14,6 +14,7 @@ struct Node
 
 struct List
 {
+    //int value; //if header list
     int size;
     struct Node* next;
 };
@@ -37,6 +38,18 @@ list createList(){
     return head;
 }
 
+void display(list head){
+    nodeptr tail = head->next;
+    if(tail == NULL){
+        cout << "The list is empty!" << endl; return;
+     }
+    while(tail != NULL){
+        cout<<tail->value<<" ";
+        tail = tail->next;
+    }
+    cout<<endl;
+}
+
 void addLast(list head, int value){
     nodeptr tail = head->next;
     if(tail == NULL){
@@ -51,18 +64,6 @@ void addLast(list head, int value){
     nodeptr newNode = createNode(value);
     tail->next = newNode;
     head->size++;
-}
-
-void display(list head){
-     nodeptr tail = head->next;
-     if(tail == NULL){
-        cout << "The list is empty!" << endl; return;
-     }
-    while(tail != NULL){
-        cout<<tail->value<<" ";
-        tail = tail->next;
-    }
-    cout<<endl;
 }
 
 void addFirst(list head, int value){
@@ -126,6 +127,21 @@ int deleteLast(list head){
     return deleteNode(head, head->size-1);
 }
 
+int searchNode(list head, int item){
+    int index = 0;
+    nodeptr tail = head->next;
+    if(tail == NULL){
+        cout << "The list is empty!" << endl; return -1;
+     }
+    while(tail != NULL){
+        //processing
+        if(tail->value == item) return index;
+        tail = tail->next;
+        index++;
+    }
+    return -1;
+}
+
 int main(){
     list myList = createList();
     
@@ -154,5 +170,6 @@ int main(){
 
     deleteLast(myList);
     display(myList);
+    cout<<searchNode(myList, 14)<<endl;
     return 0;
 }
