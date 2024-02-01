@@ -1,4 +1,10 @@
-//insersion in linked list;
+/*
+    This code is about a linked list that has the 
+    ability to shift itself into header linked list.
+    Insertion deletion and searching can be performed 
+    with this linked list.
+
+*/
 
 #include<stdio.h>
 #include<stdlib.h>
