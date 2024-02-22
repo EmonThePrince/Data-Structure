@@ -42,7 +42,7 @@ ListPtr createList() {
 void display(ListPtr head) {
     NodePtr current = head->next;
     if (current == nullptr) {
-        cout << "The list is empty!" << endl;
+        cout << "Warning: The list is empty!" << endl;
         return;
     }
     while (current != nullptr) {
@@ -50,6 +50,26 @@ void display(ListPtr head) {
         current = current->next;
     }
     cout << endl;
+}
+
+int peek(ListPtr head, int index) {
+    NodePtr current = head->next;
+    if (current == nullptr) {
+        cout << "warning: The list is empty!" << endl;
+        return 0;
+    }
+
+    if(index < 0 || index >= head->size){
+        cout << "Warning: Invalid index" << endl;
+        return 0;
+    }
+    
+    int currentIndex = 0;
+    while (currentIndex != index) {
+        current = current->next;
+        currentIndex++;
+    }
+    return current->value;
 }
 
 void addLast(ListPtr head, int value) {
@@ -98,7 +118,7 @@ void add(ListPtr head, int value, int index) {
 
 int deleteFirst(ListPtr head) {
     if (head->size == 0) {
-        cout << "List is empty!" << endl;
+        cout << "Warning: List is empty!" << endl;
         return -1;
     }
     if (head->size == 1) {
@@ -128,7 +148,7 @@ int deleteNode(ListPtr head, int index) {
         return -1;
     }
     if (head->size <= 0) {
-        cout << "List is empty!" << endl;
+        cout << "Warning:  List is empty!" << endl;
         return -1;
     }
     if (head->size == 1) {
@@ -159,7 +179,7 @@ int searchNode(ListPtr head, int item) {
     int index = 0;
     NodePtr current = head->next;
     if (current == nullptr) {
-        cout << "The list is empty!" << endl;
+        cout << "Warning: The list is empty!" << endl;
         return -1;
     }
     while (current != nullptr) {
@@ -183,14 +203,16 @@ int main() {
     addFirst(myList, 51);
     add(myList, 78, 2);
     display(myList);
-
-    deleteFirst(myList);
-    deleteLast(myList);
-    deleteFirst(myList);
-    deleteFirst(myList);
-    deleteLast(myList);
-    deleteFirst(myList);
-    display(myList);
+    
+    int  node = peek(myList,7);
+    cout << node <<endl;
+    // deleteFirst(myList);
+    // deleteLast(myList);
+    // deleteFirst(myList);
+    // deleteFirst(myList);
+    // deleteLast(myList);
+    // deleteFirst(myList);
+    // display(myList);
 
     return 0;
 }
