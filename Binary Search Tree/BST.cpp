@@ -9,6 +9,7 @@ void insert(int data){
     if(bst[1] == 0) {bst[1] = data; return;}
     int root = 1;
     while(root < MAX_SIZE && bst[root] != 0){
+        //if(data == bst[root]) return;  //if the data is not repeated
         if(data < bst[root]){
             //left
             root = 2*root;
@@ -43,6 +44,7 @@ int main()
     //inserting data..
     insert(5);
     insert(10);
+    insert(10);  //checking for repeated insertion
     insert(3);
     insert(11);
     insert(4);
