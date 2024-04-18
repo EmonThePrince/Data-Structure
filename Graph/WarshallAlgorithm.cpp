@@ -23,7 +23,7 @@ vector<vector<string>> warshallAlgo(int n, vector<vector<int>> &w){
         for(int i = 0; i < n; i++){
             for(int j = 0; j < n; j++){
                 if(w[i][j]>w[i][k]+w[k][j] && w[i][k]!= MAX && w[k][j] != MAX){
-                    if(check(paths[i][j],k))paths[i][j].push_back('0'+k);
+                    paths[i][j].push_back('0'+k);
                     w[i][j] = w[i][k] + w[k][j];
                 }
             }
