@@ -3,7 +3,7 @@ using namespace std;
 
 int MAX = 100;
 bool check(string s, int n){
-    for(int i = 0; i<n; i++){
+    for(int i = 0; i<s.size(); i++){
         if(s[i] == ('0' + n)) return false;
     }
     return true;
@@ -21,7 +21,7 @@ vector<vector<string>> warshallAlgo(int n, vector<vector<int>> &w){
         for(int i = 0; i < n; i++){
             for(int j = 0; j < n; j++){
                 if(w[i][j]>w[i][k]+w[k][j]){
-                    if(check(paths[i][j],k))paths[i][j].push_back('0'+k);
+                    if(check(paths[i][j],k))paths[i][j][paths[i][j].size()-1] = ('0'+k);
                     if(check(paths[i][j],j)) paths[i][j].push_back('0' + j);
                 }
                 else{
