@@ -1,34 +1,31 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int MAX = 100;
+const int MAX = 1000000007;
 
-bool check(string s, int n){
-    int c = 0;
-    for(int i = 0; i<s.size(); i++){
-        if(s[i] == ('0' + n)) return false;
+vector<vector<string>> warshallAlgo(int n, vector<vector<int>> &w) {
+    vector<vector<string>> paths(n, vector<string>(n));
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            if (w[i][j] != MAX) {
+                paths[i][j] = to_string(i) + "->" + to_string(j);
+            }
+        }
     }
-    return true;
-}
 
-vector<vector<string>> warshallAlgo(int n, vector<vector<int>> &w){
-    vector<vector<string>> paths(n,vector<string> (n));
-    // for(int i = 0; i < n; i++){
-    //     for(int j = 0; j < n; j++){
-    //         paths[i][j].push_back('0' + i);
-    //     }
-    //     cout<<endl;
-    // }
-    for(int k = 0; k < n; k++){
-        for(int i = 0; i < n; i++){
-            for(int j = 0; j < n; j++){
-                if(w[i][j]>w[i][k]+w[k][j] && w[i][k]!= MAX && w[k][j] != MAX){
-                    paths[i][j].push_back('0'+k);
+
+    for (int k = 0; k < n; k++) {
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (w[i][j] > w[i][k] + w[k][j] && w[i][k] != MAX && w[k][j] != MAX) {
                     w[i][j] = w[i][k] + w[k][j];
+                    paths[i][j] = paths[i][k] + "->" + paths[k][j];
                 }
             }
         }
     }
+
     return paths;
 }
 
@@ -41,6 +38,8 @@ int main(){
         {4, MAX, 1, MAX}
     };
     vector<vector<string>> paths = warshallAlgo(4, w);
+
+    cout<<"Minimium cost for each edge: "<<endl;
     for(int i = 0; i < 4; i++){
         for(int j = 0; j < 4; j++){
             if(w[i][j] == MAX) w[i][j] = 0;
@@ -48,10 +47,11 @@ int main(){
         }
         cout<<endl;
     }
-    cout<<"paths"<<endl;
+    cout<<endl;
+    cout<<"Paths: "<<endl;
     for(int i = 0; i < 4; i++){
         for(int j = 0; j < 4; j++){
-            cout<<paths[i][j]<<" ";
+            cout<<paths[i][j]<<"     ";
         }
         cout<<endl;
     }
