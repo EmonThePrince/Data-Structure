@@ -46,7 +46,7 @@ void cleanup(int numVertices) {
 }
 
 int main() {
-    int numVertices = 5; // Example: 5 vertices
+    int numVertices = 5; 
 
     // Adding edges
     addEdge(0, 1);
